@@ -1,0 +1,36 @@
+{
+  "name": "react-calculator-progress",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://JulienUsson.github.io/react-calculator-progress",
+  "dependencies": {
+    "@material-ui/core": "^1.0.0-rc.1",
+    "classnames": "^2.2.5",
+    "jss": "^9.8.1",
+    "jss-preset-default": "^4.3.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-github-fork-ribbon": "^0.5.1",
+    "react-jss": "^8.3.5",
+    "react-scripts": "1.1.1",
+    "yarn": "^1.5.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-jest": "^21.15.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "gh-pages": "^1.1.0",
+    "prettier": "^1.11.1"
+  }
+}
