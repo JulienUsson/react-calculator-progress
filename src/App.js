@@ -9,7 +9,7 @@ class App extends Component {
         <GitHubForkRibbon
           position="right"
           color="red"
-          href="https://github.com/JulienUsson/react-menu-animation"
+          href="https://github.com/JulienUsson/react-calculator-progress"
           target="_blank"
         >
           Fork me on GitHub

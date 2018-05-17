@@ -15,7 +15,7 @@ const keys = [
   '.',
   '+',
   '-',
-  '/',
+  '%',
   'x',
   '=',
 ]
@@ -74,6 +74,12 @@ const styles = theme => ({
     }, 0px 3px 15px rgba(0,0,0,.4)`,
     transition: 'box-shadow 100ms ease-in-out, transform 100ms ease-in-out',
   },
+  primaryKey: {
+    backgroundColor: theme.palette.primary[300],
+  },
+  secondaryKey: {
+    backgroundColor: theme.palette.primary[100],
+  },
   pressedKey: {
     boxShadow: `0px 1px 0px ${
       theme.palette.grey[700]
@@ -92,23 +98,33 @@ const CalculatorProgress = class extends React.Component {
     pressedKey: pickRandomKey(),
   }
 
-  getKeyClasses = keyValue =>
-    classnames(this.props.classes.key, {
-      [this.props.classes.pressedKey]: keyValue === this.state.pressedKey,
+  getKeyClasses = (keyValue, ...className) => {
+    const { classes } = this.props
+    const { pressedKey } = this.state
+    return classnames(classes.key, ...className, {
+      [classes.pressedKey]: keyValue === pressedKey,
     })
+  }
 
   componentDidMount() {
-    this.interval = setInterval(this.onInterval, 100)
+    this.keyInterval = setInterval(this.onKeyInterval, 150)
+    this.screenInterval = setInterval(this.onScreenInterval, 50)
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval)
+    clearInterval(this.keyInterval)
+    clearInterval(this.screenInterval)
   }
 
-  onInterval = () => {
+  onKeyInterval = () => {
+    this.setState({
+      pressedKey: pickRandomKey(),
+    })
+  }
+
+  onScreenInterval = () => {
     this.setState({
       value: generateRandomNumber(),
-      pressedKey: pickRandomKey(),
     })
   }
 
@@ -124,25 +140,33 @@ const CalculatorProgress = class extends React.Component {
             <div className={this.getKeyClasses('7')}>7</div>
             <div className={this.getKeyClasses('8')}>8</div>
             <div className={this.getKeyClasses('9')}>9</div>
-            <div className={this.getKeyClasses('/')}>/</div>
+            <div className={this.getKeyClasses('%', classes.secondaryKey)}>
+              /
+            </div>
           </div>
           <div className={classes.line}>
             <div className={this.getKeyClasses('4')}>4</div>
             <div className={this.getKeyClasses('5')}>5</div>
             <div className={this.getKeyClasses('6')}>6</div>
-            <div className={this.getKeyClasses('x')}>x</div>
+            <div className={this.getKeyClasses('x', classes.secondaryKey)}>
+              x
+            </div>
           </div>
           <div className={classes.line}>
             <div className={this.getKeyClasses('1')}>1</div>
             <div className={this.getKeyClasses('2')}>2</div>
             <div className={this.getKeyClasses('3')}>3</div>
-            <div className={this.getKeyClasses('-')}>-</div>
+            <div className={this.getKeyClasses('-', classes.secondaryKey)}>
+              -
+            </div>
           </div>
           <div className={classes.line}>
             <div className={this.getKeyClasses('0')}>0</div>
             <div className={this.getKeyClasses('.')}>.</div>
-            <div className={this.getKeyClasses('+')}>+</div>
-            <div className={this.getKeyClasses('=')}>=</div>
+            <div className={this.getKeyClasses('+', classes.secondaryKey)}>
+              +
+            </div>
+            <div className={this.getKeyClasses('=', classes.primaryKey)}>=</div>
           </div>
         </div>
       </div>
